@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Shreya S Rao</title>
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script type="text/javascript"
+            src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+        <style>
+        :root {
+            --primary: #3a86ff;
+            --secondary: #8338ec;
+            --dark: #212529;
+            --light: #f8f9fa;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .project-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .skill-item {
+            transition: transform 0.3s ease;
+        }
+        
+        .skill-item:hover {
+            transform: scale(1.05);
+        }
+        
+        @media (max-width: 768px) {
+            .hero-content {
+                flex-direction: column;
+            }
+            
+            .hero-text {
+                text-align: center;
+            }
+        }
+        
+        /* Toast Notification Styling */
+        #toast {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            background-color: #333;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        #toast.show {
+            opacity: 1;
+        }
+        </style>
+    </head>
+    <body>
+        <div id="toast"></div>
+
+        <nav class="fixed w-full bg-white shadow-md z-50">
+            <div
+                class="container mx-auto px-6 py-4 flex justify-between items-center">
+                <div class="text-2xl font-bold">
+                    <span class="gradient-text">Shreya S Rao</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="nav-link">Home</a>
+                    <a href="#about" class="nav-link">About</a>
+                    <a href="#experience" class="nav-link">Experience</a>
+                    <a href="#skills" class="nav-link">Skills</a>
+                    <a href="#projects" class="nav-link">Projects</a>
+                    <a href="#contact" class="nav-link">Contact</a>
+                </div>
+                <button class="md:hidden focus:outline-none" id="menu-toggle">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+            <div class="md:hidden hidden bg-white w-full py-2 px-6"
+                id="mobile-menu">
+                <div class="flex flex-col space-y-3">
+                    <a href="#home" class="block py-2">Home</a>
+                    <a href="#about" class="block py-2">About</a>
+                    <a href="#experience" class="block py-2">Experience</a>
+                    <a href="#skills" class="block py-2">Skills</a>
+                    <a href="#projects" class="block py-2">Projects</a>
+                    <a href="#contact" class="block py-2">Contact</a>
+                </div>
+            </div>
+        </nav>
+        <section id="home" class="min-h-screen flex items-center pt-16 pb-20">
+            <div class="container mx-auto px-6 ">
+                <div
+                    class="hero-content flex flex-col md:flex-row items-center justify-between ml-16">
+                    <div class="hero-text md:w-3/4 mb-12 md:mb-0">
+                        <h1 class="text-4xl md:text-6xl font-bold mb-4">
+                            Hi, I'm
+                            <span class="gradient-text">Shreya S Rao</span>
+                        </h1>
+                        <h2 class="text-2xl md:text-3xl text-gray-600 mb-6">
+                            <span id="typed" class="font-medium"></span>
+                        </h2>
+                        <p class="text-gray-700 mb-8 max-w-lg">
+                            Motivated and curious BE graduate (2025) in
+                            Information Science & Engineering with hands-on
+                            experience in
+                            Java Full Stack development and mobile app
+                            development. Skilled in Java, Spring, React, React
+                            Native, and
+                            Firebase with a strong understanding of REST APIs,
+                            database design, and Agile collaboration. Eager to
+                            contribute to impactful software solutions and
+                            continuously grow in a fast-paced engineering
+                            environment.
+                        </p>
+                        <div class="flex space-x-4">
+                            <a href="#contact"
+                                class="gradient-bg text-white px-6 py-3 rounded-lg font-medium hover:shadow-lg transition-all">
+                                Hire Me
+                            </a>
+                            <a href="#projects"
+                                class="border-2 border-primary text-primary px-6 py-3 rounded-lg font-medium hover:bg-[#8338ec] hover:text-white transition-all">
+                                My Work
+                            </a>
+                        </div>
+                    </div>
+                    <div class="hero-image md:w-1/2 flex justify-center">
+                        <div
+                            class="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-white shadow-xl">
+                            <img src="D:\Projects\Portfolio\HTML\profile.jpg"
+                                alt="Portrait of a professional web developer smiling, wearing business casual attire, with a subtle blurred office background"
+                                class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="about" class="py-20 bg-gray-50 animate-on-scroll">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">
+                    About
+                    <span class="gradient-text">Me</span>
+                </h2>
+                <div
+                    class="flex flex-col md:flex-row items-center justify-center">
+                    <div class="md:w-1/3 mb-8 md:mb-0 flex justify-center">
+                        <div
+                            class="w-64 h-64 rounded-lg overflow-hidden shadow-lg">
+                            <img
+                                src="D:\Projects\Portfolio\HTML\profile1.jpg"
+                                alt="Developer working on a laptop in a coffee shop, showing dedication and passion for technology"
+                                class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <div class="md:w-2/3 md:pl-12">
+                        <h3 class="text-2xl font-bold mb-4">Who I Am</h3>
+                        <p class="text-gray-700 mb-4">
+                            I am a motivated BE graduate in Computer Science
+                            & Design with hands-on experience in Java Full
+                            Stack development.
+                        </p>
+                        <p class="text-gray-700 mb-6">
+                            As a fresher, I'm eager to contribute to impactful
+                            software solutions and continuously grow in a
+                            fast-paced engineering environment.
+                        </p>
+                        <div class="grid grid-cols-2 gap-4 mb-6">
+                            <p>
+                                <strong>Name:</strong>
+                                Shreya S Rao
+                            </p>
+                            <p>
+                                <strong>Email:</strong>
+                                shreyarao515@gmail.com
+                            </p>
+                            <p>
+                                <strong>Phone:</strong>
+                                +91 9113894503
+                            </p>
+                            <p>
+                                <strong>From:</strong>
+                                Udupi, Karnataka, India
+                            </p>
+                        </div>
+                        <a
+                            href="https://drive.google.com/file/d/1mUutBR8BARZ-amVenDtYJYaPRkPvblRZ/view?usp=drivesdk"
+                            target="_self"
+                            class="inline-block gradient-bg text-white px-6 py-3 rounded-lg font-medium hover:shadow-lg transition-all">
+                            Download CV
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="experience" class="py-20 bg-white animate-on-scroll">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">
+                    My
+                    <span class="gradient-text">Journey</span>
+                </h2>
+                <div class="max-w-4xl mx-auto">
+                    <div class="mb-12">
+                        <div
+                            class="flex flex-col md:flex-row justify-between mb-4">
+                            <h3 class="text-xl font-bold">Training</h3>
+                            <p class="text-gray-500">Feb 2025 – Present</p>
+                        </div>
+                        <div
+                            class="bg-gray-50 p-6 rounded-lg border-l-4 border-primary">
+                            <h4 class="font-bold mb-2">Software Development
+                                Trainee</h4>
+                            <ul class="list-disc pl-5 space-y-2 text-gray-700">
+                                <li>Gained strong foundational knowledge in
+                                    Java, including classes, inheritance,
+                                    polymorphism, and exception handling.</li>
+                                <li>Understood the complete software development
+                                    lifecycle using technologies like JDBC, JSP,
+                                    Servlets, and basics of Spring Boot.</li>
+                                <li>Built responsive user interfaces using HTML,
+                                    CSS, and JavaScript, and practiced DOM
+                                    manipulation and validation.</li>
+                                <li>Learned to connect Java applications with
+                                    MySQL using JDBC, write optimized SQL
+                                    queries, and debug backend issues
+                                    efficiently</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mb-12">
+                        <h3 class="text-xl font-bold mb-6">Internship Experience</h3>
+                        <div
+                            class="bg-gray-50 p-6 rounded-lg border-l-4 border-primary mb-4">
+                            <div
+                                class="flex flex-col md:flex-row justify-between">
+                                <h4 class="font-bold">Frontend Developer Intern,
+                                    Robowaves, Bengaluru</h4>
+                                <p class="text-gray-500">Feb 2025 – May 2025</p>
+                            </div>
+                            <ul
+                                class="list-disc pl-5 space-y-2 text-gray-700 mt-2">
+                                <li>Collaborated in Agile sprints to build and
+                                    test frontend modules for a full stack job
+                                    portal project.</li>
+                                <li>Integrated RESTful APIs using JavaScript and
+                                    ensured smooth UI-backend communication.</li>
+                                <li>Participated in sprint reviews and
+                                    implemented improvements based on user
+                                    feedback.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-4">Certifications &
+                            Achievements</h3>
+                        <div
+                            class="bg-gray-50 p-6 rounded-lg border-l-4 border-primary">
+                            <ul class="list-disc pl-5 space-y-2 text-gray-700">
+                                <li>
+                                    HTML, CSS and JavaScript for Web Developer -
+                                    <strong> John Hopkins University</strong>
+                                </li>
+                                <li>
+                                    Secured 2nd place in Ideathon at Canara
+                                    Engineering College for proposing novel
+                                    solution which
+                                    involved ideas regarding potential impact of
+                                    the solution in solving real-world issues -
+                                    <strong>Ideathon 2023</strong>
+                                </li>
+                                <li> Completed a training program on Java full
+                                    stack held at Canara Engineering College
+                                    conducted
+                                    by 10 Seconds organization and Qspiders -
+                                    <strong>Java full stack</strong>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="skills" class="py-20 animate-on-scroll">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">
+                    My
+                    <span class="gradient-text">Skills</span>
+                </h2>
+                <p class="text-center text-gray-600 mb-16 max-w-2xl mx-auto">
+                    Here are the technologies and tools I work with on a regular
+                    basis.
+                </p>
+                <div
+                    class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-6 ">
+                    <div
+                        class="skill-item bg-white p-6 rounded-xl shadow-md flex flex-col items-center">
+                        <i class="fa-brands fa-java text-4xl text-red-500 mb-3"></i>
+                        <span class="font-medium">Java</span>
+                    </div>
+                    <div
+                        class="skill-item bg-white p-6 rounded-xl shadow-md flex flex-col items-center">
+                        <i class="fab fa-html5 text-4xl text-orange-500 mb-3"></i>
+                        <span class="font-medium">HTML5</span>
+                    </div>
+                    <div
+                        class="skill-item bg-white p-6 rounded-xl shadow-md flex flex-col items-center">
+                        <i class="fab fa-css3-alt text-4xl text-blue-500 mb-3"></i>
+                        <span class="font-medium">CSS3</span>
+                    </div>
+                    <div
+                        class="skill-item bg-white p-6 rounded-xl shadow-md flex flex-col items-center">
+                        <i class="fab fa-js text-4xl text-yellow-500 mb-3"></i>
+                        <span class="font-medium">JavaScript</span>
+                    </div>
+                    <div
+                        class="skill-item bg-white p-6 rounded-xl shadow-md flex flex-col items-center">
+                        <i class="fab fa-react text-4xl text-blue-400 mb-3"></i>
+                        <span class="font-medium">React</span>
+                    </div>
+                    <div
+                        class="skill-item bg-white p-6 rounded-xl shadow-md flex flex-col items-center">
+                        <i class="fas fa-database text-4xl text-gray-500 mb-3"></i>
+                        <span class="font-medium">MySQL</span>
+                    </div>
+                    <div
+                        class="skill-item bg-white p-6 rounded-xl shadow-md flex flex-col items-center">
+                        <i class="fab fa-git-alt text-4xl text-orange-600 mb-3"></i>
+                        <span class="font-medium">Git</span>
+                    </div>
+                    <div
+                        class="skill-item bg-white p-6 rounded-xl shadow-md flex flex-col items-center">
+                        <i
+                            class="fab fa-bootstrap text-4xl text-purple-500 mb-3"></i>
+                        <span class="font-medium">Bootstrap</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="projects" class="py-20 bg-gray-50 animate-on-scroll">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">
+                    My
+                    <span class="gradient-text">Projects</span>
+                </h2>
+                <p class="text-center text-gray-600 mb-16 max-w-2xl mx-auto">
+                    Here are some of my recent projects. Each one was a unique
+                    challenge that helped me grow as a developer.
+                </p>
+                <div
+                    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div
+                        class="project-card bg-white rounded-xl overflow-hidden shadow-lg">
+                        <div class="project-image h-50 overflow-hidden">
+                            <img
+                                src="D:\Projects\Portfolio\HTML\NGO.jpg"
+                                alt="Old Age Home Management System"
+                                class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Old Age Home
+                                Management System</h3>
+                            <p class="text-gray-600 mb-4">
+                                An old age home management system developed to
+                                help the Shre KrishnaOld Age Home for the easy
+                                maintance of the recodrs and other
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span
+                                    class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">PHP</span>
+                                <span
+                                    class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">HTML/CSS</span>
+                                <span
+                                    class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm">JavaScript</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <!-- <a href="#"
+                                    class="text-primary font-medium hover:underline">View
+                                    Demo</a> -->
+                                <a
+                                    href="https://github.com/shreyarao515/Old_Age_Home"
+                                    class="text-primary font-medium hover:underline">Source
+                                    Code</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="project-card bg-white rounded-xl overflow-hidden shadow-lg">
+                        <div class="project-image h-50 overflow-hidden">
+                            <img
+                                src="D:\Projects\Portfolio\HTML\ml-pic.jpg"
+                                alt="Fall Safe: Real-Time Fall Detection System
+                                "
+                                class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Fall Safe:
+                                Real-Time Fall Detection System</h3>
+                            <p class="text-gray-600 mb-4">
+                                A Machine Learning project, fall detection
+                                system developed to detect and send the alert
+                                notification via Email.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span
+                                    class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm">Python</span>
+                                <span
+                                    class="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm">HTML</span>
+                                <span
+                                    class="px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm">CSS</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <!-- <a href="#"
+                                    class="text-primary font-medium hover:underline">View
+                                    Demo</a> -->
+                                <a
+                                    href="https://github.com/shreyarao515/MAJOR_PROJECT"
+                                    class="text-primary font-medium hover:underline">Source
+                                    Code</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="project-card bg-white rounded-xl overflow-hidden shadow-lg">
+                        <div class="project-image h-50 overflow-hidden">
+                            <img
+                                src="D:\Projects\Portfolio\HTML\bata.png"
+                                alt="A mobile-first productivity app with to-do lists, calendar integration, and a sleek, minimalist user interface"
+                                class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Bata Clone</h3>
+                            <p class="text-gray-600 mb-4">
+                                Developed a bata clone to enhance the project
+                                development skill and for hands-on experience.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span
+                                    class="px-3 py-1 bg-teal-100 text-teal-800 rounded-full text-sm">HTML
+                                </span>
+                                <span
+                                    class="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm">CSS</span>
+                                <span
+                                    class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm">JavaScript
+                                </span>
+                            </div>
+                            <div class="flex justify-between">
+                                <!-- <a href="#"
+                                    class="text-primary font-medium hover:underline">View
+                                    Demo</a> -->
+                                <a
+                                    href="https://github.com/shreyarao515/Bata_Clone"
+                                    class="text-primary font-medium hover:underline">Source
+                                    Code</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="contact" class="py-20">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">
+                    Get In
+                    <span class="gradient-text">Touch</span>
+                </h2>
+                <p class="text-center text-gray-600 mb-16 max-w-2xl mx-auto">
+                    Have a project in mind or want to discuss potential
+                    opportunities? Feel free to reach out!
+                </p>
+                <div class="flex flex-col md:flex-row">
+                    <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
+                        <h3 class="text-2xl font-bold mb-6">Contact Information</h3>
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div
+                                    class="flex-shrink-0 p-2 rounded-full gradient-bg text-white mr-4">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">Location</h4>
+                                    <p class="text-gray-600">Bengaluru,
+                                        Karnataka, India</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div
+                                    class="flex-shrink-0 p-2 rounded-full gradient-bg text-white mr-4">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">Email</h4>
+                                    <p class="text-gray-600">
+                                        <a href="mailto:shreyarao515@gmail.com"
+                                            target="_blank">shreyarao515@gmail.com</a>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div
+                                    class="flex-shrink-0 p-2 rounded-full gradient-bg text-white mr-4">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">Phone</h4>
+                                    <p class="text-gray-600">+91 9113894503</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-8">
+                            <h4 class="font-bold mb-4">Follow Me</h4>
+                            <div class="flex space-x-4">
+                                <a
+                                    href="https://www.linkedin.com/in/shreya-s-rao"
+                                    target="_blank"
+                                    class="p-2 rounded-full gradient-bg text-white hover:shadow-md transition-all">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                                <a href="https://www.github.com/shreyarao515"
+                                    target="_blank"
+                                    class="p-2 rounded-full gradient-bg text-white hover:shadow-md transition-all">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md:w-1/2">
+                        <form id="contactForm" class="space-y-6" novalidate>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="name"
+                                        class="block text-gray-700 font-medium mb-2">Your
+                                        Name *</label>
+                                    <input
+                                        type="text"
+                                        id="name"
+                                        name="name"
+                                        required
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                                        placeholder="John Doe">
+                                    <div id="nameError"
+                                        class="text-red-500 text-sm mt-1 hidden">Please
+                                        enter Your Name</div>
+                                </div>
+                                <div>
+                                    <label for="email"
+                                        class="block text-gray-700 font-medium mb-2">Your
+                                        Email *</label>
+                                    <input
+                                        type="email"
+                                        id="email"
+                                        name="email"
+                                        required
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                                        placeholder="john@example.com">
+                                    <div id="emailError"
+                                        class="text-red-500 text-sm mt-1 hidden">Please
+                                        enter a valid email</div>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="subject"
+                                    class="block text-gray-700 font-medium mb-2">Subject
+                                    *</label>
+                                <input
+                                    type="text"
+                                    id="subject"
+                                    name="subject"
+                                    required
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                                    placeholder="Project inquiry">
+                                <div id="subjectError"
+                                    class="text-red-500 text-sm mt-1 hidden">Please
+                                    enter a subject</div>
+                            </div>
+                            <div>
+                                <label for="message"
+                                    class="block text-gray-700 font-medium mb-2">Message
+                                    *</label>
+                                <textarea
+                                    id="message"
+                                    name="message"
+                                    rows="5"
+                                    required
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                                    placeholder="Tell me about your project..."></textarea>
+                                <div id="messageError"
+                                    class="text-red-500 text-sm mt-1 hidden">Please
+                                    enter your message</div>
+                            </div>
+                            <button type="submit"
+                                class="gradient-bg text-white px-6 py-3 rounded-lg font-medium hover:shadow-lg transition-all w-full">
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer class="bg-gray-800 text-white py-8">
+            <div
+                class="container mx-auto px-6 text-center md:text-left md:flex justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p>
+                        &copy;
+                        <span id="current-year">2025</span>
+                        Shreya S Rao. All Rights Reserved.
+                    </p>
+                </div>
+                <div class="flex justify-center space-x-6">
+                    <a href="https://www.linkedin.com/in/shreya-s-rao-34b3532a2"
+                        target="_blank"
+                        class="text-white hover:text-primary transition-colors">
+                        <i class="fab fa-linkedin-in text-2xl"></i>
+                    </a>
+                    <a href="https://github.com/Shreya-Rao17" target="_blank"
+                        class="text-white hover:text-primary transition-colors">
+                        <i class="fab fa-github text-2xl"></i>
+                    </a>
+                </div>
+            </div>
+        </footer>
+        <button id="back-to-top"
+            class="fixed right-6 bottom-6 p-3 rounded-full gradient-bg text-white shadow-lg opacity-0 invisible transition-all duration-300">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        <script type="text/javascript"
+            src="https://cdn.emailjs.com/sdk/v4/email.min.js"></script>
+        <script src="./index.js"></script>
+
+    </body>
+</html>
