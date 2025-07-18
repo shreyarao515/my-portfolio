@@ -33,13 +33,13 @@ document.getElementById('menu-toggle').addEventListener('click', function() {
 // Typing animation
 document.addEventListener('DOMContentLoaded', function() {
   const typedElement = document.getElementById('typed');
-  const words = ['Full Stack Developer', 'Web Developer', 'Problem Solver', 'Tech Enthusiast'];
+  const words = ['Full Stack Developer', 'Web Developer', 'Problem Solver', 'Tech Enthusiastt'];//problem not solved 😂
   let wordIndex = 0;
   let charIndex = 0;
   let isDeleting = false;
   let typingSpeed = 200;
   let deletingSpeed = 100;
-  let endPause = 2000;
+  let endPause = 100;
   let startTyping = true;
   
   function type() {
